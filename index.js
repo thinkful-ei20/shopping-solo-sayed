@@ -134,21 +134,15 @@ function handleDeleteItemClicked() {
 function handleEditItemClicked() {
   $('.js-shopping-list').on('click', '.js-item-edit', function(event) {
     const newName = $(this).siblings('input').val();
-    const oldName = $(this).closest('li').find('.shopping-item').html();
+    // const currentName = $(this).closest('li').find('.shopping-item').html();
     const itemIndex = getItemIndexFromElement(event.currentTarget);
-    console.log(itemIndex)
-    function editItem(item) {
-      if (item.name === oldName) {
-        item.name = newName;
+    if (newName.length > 0) {
+      for (let i = 0; i < STORE.items.length; i++) {
+        if (STORE.items[i].name === STORE.items[itemIndex].name) {
+          STORE.items[i].name = newName;
+        }
       }
     }
-    for (let i = 0; i < STORE.items.length; i++) {
-      console.log(STORE.items[itemIndex].name)
-      if (STORE.items[i].name === STORE.items[itemIndex].name) {
-        STORE.items[i].name = newName;
-      }
-    }
-    // STORE.items.map(editItem);
     $('.js-shopping-list-edit').val('');
     renderShoppingList();
   });
