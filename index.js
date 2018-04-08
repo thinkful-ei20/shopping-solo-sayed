@@ -132,15 +132,23 @@ function handleDeleteItemClicked() {
 }
 
 function handleEditItemClicked() {
-  $('.js-shopping-list').on('click', '.js-item-edit', function() {
-    let newName = $(this).siblings('input').val();
-    let oldName = $(this).closest('li').find('.shopping-item').html();
+  $('.js-shopping-list').on('click', '.js-item-edit', function(event) {
+    const newName = $(this).siblings('input').val();
+    const oldName = $(this).closest('li').find('.shopping-item').html();
+    const itemIndex = getItemIndexFromElement(event.currentTarget);
+    console.log(itemIndex)
     function editItem(item) {
       if (item.name === oldName) {
         item.name = newName;
       }
     }
-    STORE.items.map(editItem);
+    for (let i = 0; i < STORE.items.length; i++) {
+      console.log(STORE.items[itemIndex].name)
+      if (STORE.items[i].name === STORE.items[itemIndex].name) {
+        STORE.items[i].name = newName;
+      }
+    }
+    // STORE.items.map(editItem);
     $('.js-shopping-list-edit').val('');
     renderShoppingList();
   });
