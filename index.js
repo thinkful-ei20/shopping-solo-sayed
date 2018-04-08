@@ -21,7 +21,7 @@ function generateItemElement(item, itemIndex) {
         <button class="shopping-item-delete js-item-delete">
             <span class="button-label">delete</span>
         </button>
-        <button type="submit" class="shopping-item-edit js-item-edit">edit</button>
+        <button class="shopping-item-edit js-item-edit">edit</button>
         <input type="text" name="shopping-list-edit" class="js-shopping-list-edit">
       </div>
     </li>`;
@@ -65,8 +65,8 @@ function filterList() {
       } else {
         $(this).parent().removeClass('hidden');
       }
-    })
-  })
+    });
+  });
 }
 
 function toggleHideChecked(item) {
@@ -132,9 +132,17 @@ function handleDeleteItemClicked() {
 }
 
 function handleEditItemClicked() {
-  $('.js-shopping-list').submit( function(event) {
-    const itemIndex = getItemIndexFromElement(event.currentTarget);
-    console.log('edit is working');
+  $('.js-shopping-list').on('click', '.js-item-edit', function() {
+    let newName = $(this).siblings('input').val();
+    let oldName = $(this).closest('li').find('.shopping-item').html();
+    function editItem(item) {
+      if (item.name === oldName) {
+        item.name = newName;
+      }
+    }
+    STORE.items.map(editItem);
+    $('.js-shopping-list-edit').val('');
+    renderShoppingList();
   });
 }
   
