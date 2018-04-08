@@ -21,6 +21,8 @@ function generateItemElement(item, itemIndex) {
         <button class="shopping-item-delete js-item-delete">
             <span class="button-label">delete</span>
         </button>
+        <button type="submit" class="shopping-item-edit js-item-edit">edit</button>
+        <input type="text" name="shopping-list-edit" class="js-shopping-list-edit">
       </div>
     </li>`;
 }
@@ -44,7 +46,7 @@ function addItemToShoppingList(itemName) {
 }
 
 function handleNewItemSubmit() {
-  $('#js-shopping-list-form').submit(function(event) {
+  $('#js-shopping-list-form').submit( function(event) {
     event.preventDefault();
     console.log('`handleNewItemSubmit` ran');
     const newItemName = $('.js-shopping-list-entry').val();
@@ -54,26 +56,35 @@ function handleNewItemSubmit() {
   });
 }
 
+function filterList() {
+  $('.js-shopping-list-entry').keyup(function() {
+    let currentValue = $(this).val();
+    $('#shopping-list').find('.shopping-item').each(function() {
+      if ($(this).text().indexOf(currentValue) < 0) {
+        $(this).parent().addClass('hidden');
+      } else {
+        $(this).parent().removeClass('hidden');
+      }
+    })
+  })
+}
+
 function toggleHideChecked(item) {
   if (item.checked) {
     item.hide = true;
   }
 }
-
 function hideCheckedElement() {
-  STORE.items.map(toggleHideChecked)
+  STORE.items.map(toggleHideChecked);
 }
-
 function toggleShowChecked(item) {
   if (item.checked) {
     item.hide = false;
   }
 }
-
 function showCheckedElement() {
   STORE.items.map(toggleShowChecked);
 }
-
 function handleCheckBoxClicked() {
   const checkBox = document.getElementById('toggle-checked');
   $('#js-shopping-list-form :checkbox').click ( () => {
@@ -120,12 +131,21 @@ function handleDeleteItemClicked() {
   console.log('`handleDeleteItemClicked` ran');
 }
 
+function handleEditItemClicked() {
+  $('.js-shopping-list').submit( function(event) {
+    const itemIndex = getItemIndexFromElement(event.currentTarget);
+    console.log('edit is working');
+  });
+}
+  
 function handleShoppingList() {
   renderShoppingList();
   handleNewItemSubmit();
   handleItemCheckClicked();
   handleDeleteItemClicked();
   handleCheckBoxClicked();
+  handleEditItemClicked();
+  filterList();
 
 }
 

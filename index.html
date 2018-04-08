@@ -12,22 +12,22 @@
     <div class="container">
         <h1>Shopping List</h1>
         <form id="js-shopping-list-form">
-            <div>
-                <label for="shopping-list-entry">Add an item</label>
-                <input type="text" name="shopping-list-entry" class="js-shopping-list-entry" placeholder="e.g., broccoli">
-                <button type="submit">Add item</button>
+            <div class="form-input">
+                <label for="shopping-list-entry"></label>
+                <input type="text" id="myInput" name="shopping-list-entry" class="js-shopping-list-entry" placeholder="e.g., broccoli">
+                <button type="submit" name="list-add">Add item</button>
             </div>
-            <!-- <div>
-                <label for="shopping-list-search">Search for items</label>
-                <input type="text" name="shopping-list-search" class="js-shopping-list-search">
+            <div class="form-input">
+                <label for="shopping-list-search"></label>
+                <input type="text" name="shopping-list-search" class="js-shopping-list-search" placeholder="Search for...">
                 <button type="submit">Search</button>
-            </div> -->
+            </div>
             <div class="checkbox">
                 <label for="toggle-checked-items">Hide checked items</label>
                 <input type="checkbox" id="toggle-checked" name="toggle-checked-items" class="toggle-checked-items js-toggle-checked-items">    
             </div>
         </form>
-        <ul class="shopping-list js-shopping-list">
+        <ul class="shopping-list js-shopping-list" id="shopping-list">
         </ul>
     </div>
     <script src="//code.jquery.com/jquery.min.js"></script>
