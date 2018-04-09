@@ -54,3 +54,7 @@
     display: block;
     margin-bottom: 10px;
   }
+
+  .smaller-text {
+    font-size: 15px
+  }
