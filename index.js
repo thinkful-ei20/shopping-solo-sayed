@@ -138,18 +138,21 @@ function handleDeleteItemClicked() {
 function handleEditItemClicked() {
   $('.js-shopping-list').on('click', '.js-item-edit', function(event) {
     const $e = $(this).parent().siblings('span');
-    if ($e.hasClass('shopping-item')) {
-      const val = $($e).html()
-      $e.html('<form id="submit-name-form"><input class="smaller-text" type="text" value="'+val+'" /> <button type="submit" name="submit-name" class="smaller-text">✔ </button></form>')
+    console.log($e)
+    if ($e.html().length > 50) {
+      // this fixes a side effect that kept creating new inputs side by side whenever edit was clicked
+    }else if ($e.hasClass('shopping-item') && !($e.hasClass('submit-form')) ) {
+      const val = $($e).html();
+      $e.html('<form id="submit-name-form"><input class="smaller-text" type="text" value="'+val+'" /> <button type="submit" name="submit-name" class="smaller-text">✔ </button></form>');
     }
-  })
-};
+  });
+}
 function handleNewNameSubmit () {
   $('.js-item-index-element').on('submit', function(event) {
     event.preventDefault();
-    const newVal = $(this).children('span').children().children('input').val()
-    $(this).children('span').html(newVal)
-  })
+    const newVal = $(this).children('span').children().children('input').val();
+    $(this).children('span').html(newVal);
+  });
 }
 
 // Old edit item feature
